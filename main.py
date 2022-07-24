@@ -3,6 +3,7 @@ from machine import Pin #Bombillos
 from modules.Wifi import *
 from modules.Humidity_temperature import Humidity_temperature #c,f
 from modules.Oled import Oled #c,f
+from modules.Servo_Motor import *
 from util.logica_riego import * #f
 from api.Api_Thingspeak_envio import Api_Thingspeak_envio #c
 from firebase.Firebase_put import Firebase_put
@@ -17,8 +18,10 @@ oled = Oled()
 
 #Inicio Led
 led = Pin(2, Pin.OUT)
+#Inicio servo Motor
+servo_motor= Servo_Motor()
 
-#if conectaWifi ("FAMILIA PENA", "Hupe6493$"):
+
 if connect_wifi("Etbkenliz", "kenliz2314"):
     print ("Conexión exitosa!")
 else:
@@ -38,6 +41,7 @@ def actualizaServIOT():
                 #Prender Led
         estado_riego = get_result_riego(temperatura,led)
         oled.getOled(temperatura,humedad,estado_riego)
+        servo_motor.getServo_motor(temperatura)
         #Inicio Api Thingspeack_send
         api_Thingspeak_envio = Api_Thingspeak_envio(temperatura,humedad)
         print("API",api_Thingspeak_envio)
