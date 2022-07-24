@@ -5,6 +5,7 @@ from modules.Humidity_temperature import Humidity_temperature #c,f
 from modules.Oled import Oled #c,f
 from util.logica_riego import * #f
 from api.Api_Thingspeak_envio import Api_Thingspeak_envio #c
+from firebase.Firebase_put import Firebase_put
 from utime import sleep
 
 #--------------------------- [OBJETOS]---------------------------------------
@@ -13,6 +14,7 @@ from utime import sleep
 humidity_temperature = Humidity_temperature()
 #Inicio Pantalla Oled
 oled = Oled()
+
 #Inicio Led
 led = Pin(2, Pin.OUT)
 
@@ -39,6 +41,9 @@ def actualizaServIOT():
         #Inicio Api Thingspeack_send
         api_Thingspeak_envio = Api_Thingspeak_envio(temperatura,humedad)
         print("API",api_Thingspeak_envio)
+        #Inicio Firebase
+        firebase_put = Firebase_put()
+        firebase_put.put_firebase()
         
 def do_main():
     print("entro domain")
