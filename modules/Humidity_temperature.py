@@ -8,5 +8,4 @@ class Humidity_temperature:
         self.sensorDHT.measure() #Inicializar, verificar que a comunicacion entre el sensor este bien
         temperatura=self.sensorDHT.temperature() #lee temperatura
         humedad=self.sensorDHT.humidity() #lee humedad
-        print(temperatura,humedad)
         return temperatura, humedad
